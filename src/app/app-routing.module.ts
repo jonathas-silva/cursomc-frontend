@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NoPreloading, PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -10,6 +10,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'categorias',
+    loadChildren: () => import('./categorias/categorias.module').then( m => m.CategoriasPageModule)
   },
 ];
 

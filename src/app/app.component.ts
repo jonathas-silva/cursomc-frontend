@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
+  //isso é um conjunto chave valor
+  public appPages = [
+    {
+      title: 'Home', component: 'home', icon: 'planet'
+    }
+  ]; 
+
   constructor() {}
 }
