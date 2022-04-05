@@ -10,14 +10,17 @@
 
   <ion-title>Categorias</ion-title>    
 </ion-toolbar>
-  
 </ion-header>
 
 <ion-content>
-<h3>Página de Categorias</h3>
-<div>
- <p>Categorias:</p>
- {{categorias}}
-
-</div>
+<ion-list>
+  <ion-button size="large" expand="block" fill="clear" *ngFor="let item of items"> <!--itera sobre o item da lista items do controlador-->
+      <ion-item id="botao" >
+      <ion-thumbnail slot="start">
+        <img src="{{bucketUrl}}/cat{{item.id}}.jpg">
+      </ion-thumbnail>
+      <p2 id="texto"> {{item.nome}} </p2> 
+    </ion-item>
+  </ion-button>
+</ion-list>
 </ion-content>
