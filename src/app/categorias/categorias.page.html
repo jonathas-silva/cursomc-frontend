@@ -14,13 +14,13 @@
 
 <ion-content>
 <ion-list>
-  <ion-button size="large" expand="block" fill="clear" *ngFor="let item of items"> <!--itera sobre o item da lista items do controlador-->
-      <ion-item id="botao" >
+ <!--itera sobre o item da lista items do controlador-->
+      <ion-item button *ngFor="let item of items">
       <ion-thumbnail slot="start">
         <img src="{{bucketUrl}}/cat{{item.id}}.jpg">
       </ion-thumbnail>
       <p2 id="texto"> {{item.nome}} </p2> 
     </ion-item>
-  </ion-button>
+
 </ion-list>
 </ion-content>
