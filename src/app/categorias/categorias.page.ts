@@ -25,10 +25,7 @@ bucketUrl: string = API_CONFIG.bucketBaseUrl;
       .subscribe(response => {
         this.items = response;
       }, 
-      error => {
-        console.log(error);
-      }
-      );
+      error => {});
   }
 
 

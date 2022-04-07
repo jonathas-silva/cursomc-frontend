@@ -25,10 +25,13 @@ export class HomePage {
     }
 
     ionViewWillEnter() {
-      this.menu.swipeGesture(false);
+      setTimeout(() => this.menu.swipeGesture(false),500);
+
+      //aqui foi colocado 500ms de delay para ativação/desativação do swipeGesture devido
+      //ao irritante erro Assert: cannot be animating
     }
     ionViewWillLeave(){
-      this.menu.swipeGesture(true);
+      setTimeout(() => this.menu.swipeGesture(true),500);
     }
 
 }
