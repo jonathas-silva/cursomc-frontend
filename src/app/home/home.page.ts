@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, NavController } from '@ionic/angular';
 import { CredenciaisDTO } from 'src/models/credenciais.dto';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,12 @@ import { CredenciaisDTO } from 'src/models/credenciais.dto';
 })
 export class HomePage {
 
-  constructor(public router: Router, public navCtrl: NavController, public menu: MenuController) {
+  constructor(
+    public router: Router, 
+    public navCtrl: NavController, 
+    public menu: MenuController,
+    public auth: AuthService
+    ) {
 
   }
 
@@ -22,8 +28,13 @@ export class HomePage {
   public login(){
     //O método push não existe mais desde o ionic 4.
     //De-se utilizar o método navigateForward com o endereço registrado no Router
-    console.log(this.creds);
-    this.navCtrl.navigateForward('categorias');
+    this.auth.authenticate(this.creds)
+      .subscribe(response => {
+        console.log(response.headers.get('Authorization'));
+        this.navCtrl.navigateRoot('categorias');
+        },
+        error => {});
+        
     //this.html.push('CategoriasPage');
     
     
