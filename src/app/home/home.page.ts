@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, NavController } from '@ionic/angular';
+import { CredenciaisDTO } from 'src/models/credenciais.dto';
 
 @Component({
   selector: 'app-home',
@@ -13,10 +14,15 @@ export class HomePage {
 
   }
 
+  creds :CredenciaisDTO = {
+    email: "",
+    senha: ""
+  };
 
   public login(){
     //O método push não existe mais desde o ionic 4.
     //De-se utilizar o método navigateForward com o endereço registrado no Router
+    console.log(this.creds);
     this.navCtrl.navigateForward('categorias');
     //this.html.push('CategoriasPage');
     
