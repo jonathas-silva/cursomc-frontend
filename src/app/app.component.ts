@@ -9,10 +9,9 @@ export class AppComponent {
 
   //isso é um conjunto chave valor
   public appPages = [
-    {
-      title: 'Home', component: 'home', icon: 'home-outline'
-    }
-  ]; 
+    { title: 'Profile', component: 'profile', icon: 'person-circle' },
+    { title: 'Categorias', component: 'categorias', icon: 'pricetag' }
+  ];
 
-  constructor() {}
+  constructor() { }
 }
