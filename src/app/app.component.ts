@@ -10,7 +10,7 @@ export class AppComponent {
   //isso é um conjunto chave valor
   public appPages = [
     {
-      title: 'Home', component: 'home', icon: 'planet'
+      title: 'Home', component: 'home', icon: 'home-outline'
     }
   ]; 
 

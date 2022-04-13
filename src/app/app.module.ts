@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CategoriaService } from 'src/services/domain/categoria.service';
 import { ErrorCatchingInterceptor } from 'src/interceptors/error-interceptor';
 import { AuthService } from 'src/services/auth.service';
+import { StorageService } from 'src/services/storage.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,8 +25,9 @@ import { AuthService } from 'src/services/auth.service';
       useClass: ErrorCatchingInterceptor,
       multi: true
     },
-    AuthService
+    AuthService,
+    StorageService
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

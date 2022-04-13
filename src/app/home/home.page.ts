@@ -12,43 +12,43 @@ import { AuthService } from 'src/services/auth.service';
 export class HomePage {
 
   constructor(
-    public router: Router, 
-    public navCtrl: NavController, 
+    public router: Router,
+    public navCtrl: NavController,
     public menu: MenuController,
     public auth: AuthService
-    ) {
+  ) {
 
   }
 
-  creds :CredenciaisDTO = {
+  creds: CredenciaisDTO = {
     email: "",
     senha: ""
   };
 
-  public login(){
+  public login() {
     //O método push não existe mais desde o ionic 4.
     //De-se utilizar o método navigateForward com o endereço registrado no Router
     this.auth.authenticate(this.creds)
       .subscribe(response => {
-        console.log(response.headers.get('Authorization'));
+        this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.navigateRoot('categorias');
-        },
-        error => {});
-        
+      },
+        error => { });
+
     //this.html.push('CategoriasPage');
-    
-    
+
+
     //this.router.navigate(['categorias']); //-> também funciona
-    }
+  }
 
-    ionViewWillEnter() {
-      setTimeout(() => this.menu.swipeGesture(false),500);
+  ionViewWillEnter() {
+    setTimeout(() => this.menu.swipeGesture(false), 500);
 
-      //aqui foi colocado 500ms de delay para ativação/desativação do swipeGesture devido
-      //ao irritante erro Assert: cannot be animating
-    }
-    ionViewWillLeave(){
-      setTimeout(() => this.menu.swipeGesture(true),500);
-    }
+    //aqui foi colocado 500ms de delay para ativação/desativação do swipeGesture devido
+    //ao irritante erro Assert: cannot be animating
+  }
+  ionViewWillLeave() {
+    setTimeout(() => this.menu.swipeGesture(true), 500);
+  }
 
 }

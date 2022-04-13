@@ -1,26 +1,26 @@
 <ion-header>
-<ion-toolbar>
+  <ion-toolbar>
     <ion-buttons slot="start">
-  <ion-menu-toggle>
-      <ion-button>
-        <ion-icon name="menu"></ion-icon>
-      </ion-button>
-    </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
     </ion-buttons>
 
-  <ion-title>Categorias</ion-title>    
-</ion-toolbar>
+    <ion-title>Categorias</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-list>
- <!--itera sobre o item da lista items do controlador-->
-      <ion-item button *ngFor="let item of items" >
+  <ion-list>
+    <!--itera sobre o item da lista items do controlador-->
+    <ion-item button *ngFor="let item of items">
       <ion-thumbnail slot="start">
         <img src="{{bucketUrl}}/cat{{item.id}}.jpg">
       </ion-thumbnail>
-      <label id="texto"> {{item.nome}} </label> 
+      <label id="texto"> {{item.nome}} </label>
     </ion-item>
 
-</ion-list>
+  </ion-list>
 </ion-content>
