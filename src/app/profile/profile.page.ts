@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController, ToastController } from '@ionic/angular';
 import { API_CONFIG } from 'src/config/api.config';
 import { ClienteDTO } from 'src/models/cliente.dto';
 import { ClienteService } from 'src/services/domain/cliente.service';
@@ -15,7 +16,9 @@ export class ProfilePage implements OnInit {
 
   constructor(
     public storage: StorageService,
-    public clienteService: ClienteService
+    public clienteService: ClienteService,
+    public navCtrl: NavController,
+    public toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -26,8 +29,15 @@ export class ProfilePage implements OnInit {
           this.cliente = response;
           this.getImageifExists();
         },
-          error => { }
-        )
+          error => {
+            if (error.status == 403) {
+              this.navCtrl.navigateRoot('home');
+              this.errorToast();
+            }
+          });
+    } else {
+      this.navCtrl.navigateRoot('home');
+      this.errorToast();
     }
   }
 
@@ -38,6 +48,16 @@ export class ProfilePage implements OnInit {
       },
         error => { }
       );
+  }
+
+  async errorToast() {
+    const toast = await this.toastController.create({
+      message: 'Usuário Não autorizado. Faça login novamente!',
+      duration: 5000,
+      position: 'top',
+      color: 'warning'
+    });
+    toast.present();
   }
 
 
