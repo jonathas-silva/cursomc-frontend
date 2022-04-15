@@ -9,10 +9,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CategoriaService } from 'src/services/domain/categoria.service';
-import { ErrorCatchingInterceptor } from 'src/interceptors/error-interceptor';
 import { AuthService } from 'src/services/auth.service';
 import { StorageService } from 'src/services/storage.service';
 import { ClienteService } from 'src/services/domain/cliente.service';
+import { AuthInterceptorProvider } from 'src/interceptors/auth-interceptor';
+import { ErrorInterceptorProvider } from 'src/interceptors/error-interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,11 +22,8 @@ import { ClienteService } from 'src/services/domain/cliente.service';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     CategoriaService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorCatchingInterceptor,
-      multi: true
-    },
+    AuthInterceptorProvider,
+    ErrorInterceptorProvider,
     AuthService,
     StorageService,
     ClienteService
