@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,15 @@ export class AppComponent {
   public appPages = [
     { title: 'Profile', component: 'profile', icon: 'person-circle' },
     { title: 'Categorias', component: 'categorias', icon: 'pricetag' },
-    {title: 'Logout', component: '', icon: 'log-out'}
+    { title: 'Logout', component: '', icon: 'log-out' }
   ];
 
-  constructor() { }
+  constructor(
+    public auth: AuthService
+  ) { }
+
+  logoutMenu() {
+    this.auth.logout();
+    console.log("Logout");
+  }
 }
