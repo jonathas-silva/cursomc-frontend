@@ -3,12 +3,14 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Observable, throwError } from 'rxjs';
 import { catchError } from "rxjs/operators";
 import { StorageService } from 'src/services/storage.service';
+import { AlertController } from '@ionic/angular';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
     constructor(
-        public storage: StorageService
+        public storage: StorageService,
+        public alertCtrl: AlertController
     ) {
     }
 
@@ -30,18 +32,54 @@ export class AuthInterceptor implements HttpInterceptor {
                     console.log(errorObj);
 
                     switch (errorObj.status) {
+                        case 401:
+                            this.handle401();
+                            break;
+
                         case 403:
                             this.handle403();
                             break;
+
+                        default:
+                            this.handleDefautError(errorObj);
                     }
 
                     return throwError(errorObj)
                 })) as any;
     }
+    handleDefautError(errorObj) {
+        this.presentAlertDefaut(errorObj.error, errorObj.message, errorObj.status);
+    }
+    handle401() {
+        this.presentAlert401();
+    }
 
     handle403() {
         this.storage.setLocalUser(null);
     }
+
+    async presentAlert401() {
+        const alert = await this.alertCtrl.create({
+            header: 'Erro 401: falha de autenticação',
+            message: 'Email ou senha incorretos',
+            backdropDismiss: false,
+            mode: "md",
+            buttons: ['OK']
+        });
+        await alert.present();
+    }
+
+    async presentAlertDefaut(errorObj: string, message: string, errorStatus: string) {
+        const alert = await this.alertCtrl.create({
+            header: 'Erro ' + errorStatus + ': ' + errorObj,
+            message: message,
+            backdropDismiss: false,
+            mode: "md",
+            buttons: ['OK']
+        });
+        await alert.present();
+    }
+
 }
 export const ErrorInterceptorProvider = {
     provide: HTTP_INTERCEPTORS,

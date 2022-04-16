@@ -6,11 +6,11 @@ import { CategoriaDTO } from "src/models/categoria.DTO";
 
 @Injectable()
 export class CategoriaService {
-    constructor(public http: HttpClient){
-        
+    constructor(public http: HttpClient) {
+
     }
 
-    findAll() : Observable<CategoriaDTO[]> {
+    findAll(): Observable<CategoriaDTO[]> {
         return this.http.get<CategoriaDTO[]>(`${API_CONFIG.baseUrl}/categorias`);
     }
 }
