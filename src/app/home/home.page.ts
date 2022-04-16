@@ -42,6 +42,10 @@ export class HomePage {
     //this.router.navigate(['categorias']); //-> também funciona
   }
 
+  public signup() {
+    this.navCtrl.navigateForward('signup');
+  }
+
   ionViewWillEnter() {
     setTimeout(() => this.menu.swipeGesture(false), 500);
     this.auth.refreshToken()
