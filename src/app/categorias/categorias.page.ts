@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs/internal/Observable';
 import { API_CONFIG } from 'src/config/api.config';
 import { CategoriaDTO } from 'src/models/categoria.DTO';
@@ -11,22 +12,28 @@ import { CategoriaService } from 'src/services/domain/categoria.service';
 })
 export class CategoriasPage implements OnInit {
 
-items: CategoriaDTO[];
-bucketUrl: string = API_CONFIG.bucketBaseUrl;
+  items: CategoriaDTO[];
+  bucketUrl: string = API_CONFIG.bucketBaseUrl;
 
 
-  constructor(public categoriaService: CategoriaService) { }
+  constructor(
+    public categoriaService: CategoriaService,
+    public navCtrl: NavController
+  ) { }
 
   ngOnInit() {
   }
-  
-  ionViewDidEnter(){
+
+  ionViewDidEnter() {
     this.categoriaService.findAll()
       .subscribe(response => {
         this.items = response;
-      }, 
-      error => {});
+      },
+        error => { });
   }
 
+  showProdutos() {
+    this.navCtrl.navigateForward('produtos');
+  }
 
 }
