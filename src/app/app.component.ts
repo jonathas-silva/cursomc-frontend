@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/services/auth.service';
 
 @Component({
@@ -16,11 +17,19 @@ export class AppComponent {
   ];
 
   constructor(
-    public auth: AuthService
+    public auth: AuthService,
+    public navCtrl: NavController
   ) { }
 
-  logoutMenu() {
-    this.auth.logout();
-    console.log("Logout");
+
+  openPage(page: { title: string, component: string, icon: string }) {
+    console.log(page.component);
+    if (page.title == "Logout") {
+      this.auth.logout();
+      console.log("Logout");
+      this.navCtrl.navigateRoot('home');
+    } else {
+      this.navCtrl.navigateForward(page.component);
+    }
   }
 }

@@ -5,7 +5,7 @@
       <ion-list id="inbox-list">
         <ion-list-header>Menu</ion-list-header>
         <ion-menu-toggle *ngFor="let p of appPages">
-          <ion-item [routerLink]="[p.component]" (click)="logoutMenu()">
+          <ion-item (click)="openPage(p)">
             <ion-icon slot="start" [name]="p.icon"></ion-icon>
             <ion-label>{{ p.title }}</ion-label>
           </ion-item>
