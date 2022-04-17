@@ -45,7 +45,7 @@ export class SignupPage implements OnInit {
     this.estadoService.findAll()
       .subscribe(response => {
         this.estados = response;
-        this.formGroup.controls.estado_id.setValue(this.estados[0].id);
+        this.formGroup.controls.estadoId.setValue(this.estados[0].id);
         this.updateCidades();
       },
         error => { });
