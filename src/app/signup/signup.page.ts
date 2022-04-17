@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertController, NavController } from '@ionic/angular';
 import { CidadeDTO } from 'src/models/cidade.dto';
 import { EstadoDTO } from 'src/models/estado.dto';
 import { CidadeService } from 'src/services/domain/cidade.service';
+import { ClienteService } from 'src/services/domain/cliente.service';
 import { EstadoService } from 'src/services/domain/estado.service';
 
 @Component({
@@ -19,7 +21,10 @@ export class SignupPage implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public cidadeService: CidadeService,
-    public estadoService: EstadoService
+    public estadoService: EstadoService,
+    public clienteService: ClienteService,
+    public alertCtrl: AlertController,
+    public navCtrl: NavController
   ) {
     //usado para controlar a validação do formulário (antes de enviá-lo)
     this.formGroup = this.formBuilder.group({
@@ -50,6 +55,7 @@ export class SignupPage implements OnInit {
       },
         error => { });
   }
+
   updateCidades() {
     let estado_id = this.formGroup.value.estadoId;
     this.cidadeService.findAll(estado_id)
@@ -61,7 +67,28 @@ export class SignupPage implements OnInit {
   }
 
   signupUser() {
-    console.log('enviou o form');
+    this.clienteService.insert(this.formGroup.value)
+      .subscribe(response => {
+        this.showInsertOk();
+      },
+        error => { });
+  }
+  showInsertOk() {
+    this.successfulCreateAlert();
+  }
+
+  async successfulCreateAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Sucesso!',
+      message: 'Cadastro efetuado com sucesso',
+      backdropDismiss: false,
+      mode: "md",
+      buttons: [{
+        text: 'OK',
+        handler: () => { this.navCtrl.pop(); }
+      }]
+    });
+    await alert.present();
   }
 
 }
