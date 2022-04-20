@@ -18,7 +18,8 @@ export class ProdutosPage implements OnInit {
 
   constructor(
     public produtoService: ProdutoService,
-    public router: ActivatedRoute
+    public router: ActivatedRoute,
+    public navCtrl: NavController
   ) { }
 
   ngOnInit() {
@@ -46,6 +47,11 @@ export class ProdutosPage implements OnInit {
         },
           error => { });
     }
+  }
+
+  showDetail() {
+    console.log('tentando abrir...');
+    this.navCtrl.navigateForward('produto-detail');
   }
 
 }

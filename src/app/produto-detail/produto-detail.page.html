@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{item.nome}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- Foi necessário definir explicitamente que o o card era flexbox e a orientação era em colunas,
+  para que o layout se ajusta-se ao centro e tomando todo a tela. -->
+  <ion-card class="parent">
+    <img [src]="item?.imageUrl || 'assets/imgs/prod.jpg'" />
+    <ion-card-header>
+      <ion-card-title>{{item?.nome}}</ion-card-title>
+      <ion-card-subtitle>{{item.preco | currency}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block">Adicionar ao carrinho</ion-button>
+
+
+
+</ion-content>
